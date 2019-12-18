@@ -2,7 +2,7 @@ package com.gfadvocaciars.lawyeradm.domain;
 
 import com.gfadvocaciars.lawyeradm.domain.enums.MaritalStatus;
 import com.gfadvocaciars.lawyeradm.domain.enums.Permission;
-import com.gfadvocaciars.lawyeradm.domain.enums.Specialization;
+import com.gfadvocaciars.lawyeradm.domain.enums.Area;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,16 +11,16 @@ public class Lawyer extends Employee implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String oab;
-    private Specialization specialization;
+    private Area area;
 
     public Lawyer() {
         super();
     }
 
-    public Lawyer(String name, String phone, Address address, String cpf, String rg, Date birthdate, String occupation, MaritalStatus maritalStatus, String nacionalilty, String id, Permission permission, String oab, Specialization specialization) {
+    public Lawyer(String name, String phone, Address address, String cpf, String rg, Date birthdate, String occupation, MaritalStatus maritalStatus, String nacionalilty, String id, Permission permission, String oab, Area area) {
         super(name, phone, address, cpf, rg, birthdate, occupation, maritalStatus, nacionalilty, id, permission);
         this.oab = oab;
-        this.specialization = specialization;
+        this.area = area;
     }
 
     public String getOab() {
@@ -31,11 +31,11 @@ public class Lawyer extends Employee implements Serializable {
         this.oab = oab;
     }
 
-    public Specialization getSpecialization() {
-        return specialization;
+    public Area getArea() {
+        return area;
     }
 
-    public void setSpecialization(Specialization specialization) {
-        this.specialization = specialization;
+    public void setArea(Area area) {
+        this.area = area;
     }
 }
