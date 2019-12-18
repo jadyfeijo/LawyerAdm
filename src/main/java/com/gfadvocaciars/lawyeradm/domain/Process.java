@@ -1,5 +1,6 @@
 package com.gfadvocaciars.lawyeradm.domain;
 
+import com.gfadvocaciars.lawyeradm.domain.enums.Area;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -16,6 +17,7 @@ public class Process implements Serializable {
     private String id;
     private String number;
     private Vara vara;
+    private Area area;
     private Person claimant;
     private Person defendant;
 
@@ -25,10 +27,11 @@ public class Process implements Serializable {
     public Process() {
     }
 
-    public Process(String id, String number, Vara vara, Person claimant, Person defendant) {
+    public Process(String id, String number, Vara vara, Area area, Person claimant, Person defendant) {
         this.id = id;
         this.number = number;
         this.vara = vara;
+        this.area = area;
         this.claimant = claimant;
         this.defendant = defendant;
     }
@@ -79,5 +82,13 @@ public class Process implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Area getArea() {
+        return area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
     }
 }
