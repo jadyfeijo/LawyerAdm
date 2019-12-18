@@ -1,22 +1,32 @@
 package com.gfadvocaciars.lawyeradm.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@Document
 public class Process implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    private String id;
     private String number;
     private Vara vara;
     private Person claimant;
     private Person defendant;
+
+    @DBRef(lazy = true)
     private List<Deadline> deadlines = new ArrayList<>();
 
     public Process() {
     }
 
-    public Process(String number, Vara vara, Person claimant, Person defendant) {
+    public Process(String id, String number, Vara vara, Person claimant, Person defendant) {
+        this.id = id;
         this.number = number;
         this.vara = vara;
         this.claimant = claimant;
@@ -61,5 +71,13 @@ public class Process implements Serializable {
 
     public void setDeadlines(List<Deadline> deadlines) {
         this.deadlines = deadlines;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
