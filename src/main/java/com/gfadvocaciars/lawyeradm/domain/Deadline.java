@@ -1,6 +1,5 @@
 package com.gfadvocaciars.lawyeradm.domain;
 
-import com.gfadvocaciars.lawyeradm.domain.dto.ProcessDTO;
 import com.gfadvocaciars.lawyeradm.domain.enums.DeadlineStatus;
 import com.gfadvocaciars.lawyeradm.domain.enums.DeadlineType;
 import org.springframework.data.annotation.Id;
@@ -21,13 +20,13 @@ public class Deadline implements Serializable {
     private Date initialDate;
     private Date finalDate;
     private DeadlineStatus status;
-    private ProcessDTO process;
+    private String process;
     private Employee maker;
 
     public Deadline() {
     }
 
-    public Deadline(String id, DeadlineType type, String description, Integer deadline, Date initialDate, Date finalDate, ProcessDTO process) {
+    public Deadline(String id, DeadlineType type, String description, Integer deadline, Date initialDate, Date finalDate, String process) {
         this.id = id;
         this.type = type;
         this.description = description;
@@ -101,11 +100,11 @@ public class Deadline implements Serializable {
         this.finalDate = finalDate;
     }
 
-    public ProcessDTO getProcess() {
+    public String getProcess() {
         return process;
     }
 
-    public void setProcess(ProcessDTO process) {
+    public void setProcess(String process) {
         this.process = process;
     }
 }
