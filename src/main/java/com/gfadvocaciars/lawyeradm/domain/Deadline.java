@@ -5,12 +5,10 @@ import com.gfadvocaciars.lawyeradm.domain.enums.DeadlineType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
 import java.util.Date;
 
 @Document
-public class Deadline implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Deadline{
 
     @Id
     private String id;
@@ -76,22 +74,6 @@ public class Deadline implements Serializable {
         this.initialDate = initialDate;
     }
 
-    public DeadlineStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(DeadlineStatus status) {
-        this.status = status;
-    }
-
-    public Employee getMaker() {
-        return maker;
-    }
-
-    public void setMaker(Employee maker) {
-        this.maker = maker;
-    }
-
     public Date getFinalDate() {
         return finalDate;
     }
@@ -100,11 +82,27 @@ public class Deadline implements Serializable {
         this.finalDate = finalDate;
     }
 
+    public DeadlineStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(DeadlineStatus status) {
+        this.status = status;
+    }
+
     public String getProcess() {
         return process;
     }
 
     public void setProcess(String process) {
         this.process = process;
+    }
+
+    public Employee getMaker() {
+        return maker;
+    }
+
+    public void setMaker(Employee maker) {
+        this.maker = maker;
     }
 }

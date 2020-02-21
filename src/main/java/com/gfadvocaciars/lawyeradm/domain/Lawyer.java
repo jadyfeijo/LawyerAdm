@@ -6,6 +6,7 @@ import com.gfadvocaciars.lawyeradm.domain.enums.Area;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Lawyer extends Employee implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -17,8 +18,8 @@ public class Lawyer extends Employee implements Serializable {
         super();
     }
 
-    public Lawyer(String name, String phone, Address address, String cpf, String rg, Date birthdate, String occupation, MaritalStatus maritalStatus, String nacionalilty, String id, Permission permission, String oab, Area area) {
-        super(name, phone, address, cpf, rg, birthdate, occupation, maritalStatus, nacionalilty, id, permission);
+    public Lawyer(String name, String phone, Address address, String cpf, String rg, Date birthdate, String occupation, MaritalStatus maritalStatus, String nacionalilty, String id, String email, List<Permission> permission, String password, String oab, Area area) {
+        super(name, phone, address, cpf, rg, birthdate, occupation, maritalStatus, nacionalilty, id, email, permission, password);
         this.oab = oab;
         this.area = area;
     }
