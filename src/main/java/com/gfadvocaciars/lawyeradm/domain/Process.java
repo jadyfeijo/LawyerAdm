@@ -21,9 +21,6 @@ public class Process implements Serializable {
     private Person claimant;
     private Person defendant;
 
-    @DBRef(lazy = true)
-    private List<Deadline> deadlines = new ArrayList<>();
-
     public Process() {
     }
 
@@ -66,14 +63,6 @@ public class Process implements Serializable {
 
     public void setDefendant(Person defendant) {
         this.defendant = defendant;
-    }
-
-    public List<Deadline> getDeadlines() {
-        return deadlines;
-    }
-
-    public void setDeadlines(List<Deadline> deadlines) {
-        this.deadlines = deadlines;
     }
 
     public String getId() {
