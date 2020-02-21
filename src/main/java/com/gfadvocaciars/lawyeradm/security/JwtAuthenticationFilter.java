@@ -1,4 +1,4 @@
-package com.gfadvocaciars.lawyeradm;
+package com.gfadvocaciars.lawyeradm.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gfadvocaciars.lawyeradm.domain.User;
