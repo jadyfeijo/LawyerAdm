@@ -4,6 +4,8 @@ import com.gfadvocaciars.lawyeradm.domain.Deadline;
 import com.gfadvocaciars.lawyeradm.domain.enums.DeadlineStatus;
 import com.gfadvocaciars.lawyeradm.exceptions.NotFoundException;
 import com.gfadvocaciars.lawyeradm.repositories.DeadlineRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 @Service
+@RequiredArgsConstructor
 public class DeadlineService {
 
     @Autowired
@@ -41,17 +44,9 @@ public class DeadlineService {
 
     public Deadline upadate(String deadlineId, Deadline updatedDeadline){
         Deadline deadline = findById(deadlineId);
+        updatedDeadline.setId(deadline.getId());
 
-        deadline.setType(updatedDeadline.getType());
-        deadline.setStatus(updatedDeadline.getStatus());
-        deadline.setDescription(updatedDeadline.getDescription());
-        deadline.setDeadline(updatedDeadline.getDeadline());
-        deadline.setInitialDate(updatedDeadline.getInitialDate());
-        deadline.setFinalDate(updatedDeadline.getFinalDate());
-        deadline.setProcess(updatedDeadline.getProcess());
-        deadline.setMaker(updatedDeadline.getMaker());
-
-        return repo.save(deadline);
+        return repo.save(updatedDeadline);
     }
 
     private Date calculateBusinessDayDeadline(Date initialDate, int deadline) {
