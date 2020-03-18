@@ -30,8 +30,8 @@ public class Instantiation implements CommandLineRunner {
 
         Lawyer lw = new Lawyer();
         lw.setOab("75501");
-        processRepository.save(proc);
-        employeeRepository.save(lw);
-        deadlineRepository.save(new Deadline());
+     //   processRepository.save(proc);
+       // employeeRepository.save(lw);
+       // deadlineRepository.save(new Deadline());
     }
 }

@@ -1,8 +1,10 @@
 package com.gfadvocaciars.lawyeradm.services;
 
 import com.gfadvocaciars.lawyeradm.domain.Employee;
+import com.gfadvocaciars.lawyeradm.domain.enums.Permission;
 import com.gfadvocaciars.lawyeradm.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ public class EmployeeService {
     private BCryptPasswordEncoder pe;
 
     public Employee create(Employee employee){
+        employee.addPermission(Permission.ADMIN);
         employee.setPassword(pe.encode(employee.getPassword()));
 
         return repository.save(employee);

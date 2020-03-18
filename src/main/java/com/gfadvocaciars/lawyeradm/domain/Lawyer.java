@@ -19,7 +19,7 @@ public class Lawyer extends Employee implements Serializable {
     }
 
     public Lawyer(String name, String phone, Address address, String cpf, String rg, Date birthdate, String occupation, MaritalStatus maritalStatus, String nacionalilty, String id, String email, List<Permission> permission, String password, String oab, Area area) {
-        super(name, phone, address, cpf, rg, birthdate, occupation, maritalStatus, nacionalilty, id, email, permission, password);
+        super(name, phone, address, cpf, rg, birthdate, occupation, maritalStatus, nacionalilty, id, email, password);
         this.oab = oab;
         this.area = area;
     }

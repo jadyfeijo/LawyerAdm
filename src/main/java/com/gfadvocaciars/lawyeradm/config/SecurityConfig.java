@@ -1,10 +1,13 @@
 package com.gfadvocaciars.lawyeradm.config;
 
 import com.gfadvocaciars.lawyeradm.security.JwtAuthenticationFilter;
+import com.gfadvocaciars.lawyeradm.security.JwtAuthorizationFilter;
 import com.gfadvocaciars.lawyeradm.security.JwtUtil;
+import com.gfadvocaciars.lawyeradm.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -22,6 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] PUBLIC_MATCHERS = {"/employee/**"};
 
+    private static final String[] PUBLIC_MATCHERS_GET = {"/processes/**"};
+
+
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -32,9 +38,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
         http.cors().and().csrf().disable();
         http.authorizeRequests()
+                .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated();
         http.addFilter(new JwtAuthenticationFilter(authenticationManager(),jwtUtil));
+        http.addFilter(new JwtAuthorizationFilter(authenticationManager(),jwtUtil,userDetailsService));
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 

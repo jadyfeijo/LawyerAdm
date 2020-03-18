@@ -1,33 +1,59 @@
 package com.gfadvocaciars.lawyeradm.security;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 
 @Component
 public class JwtUtil {
 
-    private String secret = "secret";
+    @Value("${jwt.secret}")
+    private String secret;
 
-    private Long expiration = 600L;
+    public String generateToken(String username) {
 
-    public String generateToken(String username){
+        SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        return Jwts.builder()
+                .claim("email", username)
+                .signWith(key)
+                .compact();
+    }
 
-    return JWT
-            .create()
-            .withIssuedAt(new Date())
-            .withClaim("userId", username)
-                .sign(algorithm());
-}
+    public boolean tokenValido(String token) {
+        Claims claims = getClaims(token);
+        if (claims != null) {
+            String username = claims.get("email", String.class);
+            return username != null;
+        }
+        return false;
+    }
 
-    private Algorithm algorithm() {
+    public String getUsername(String token) {
+        Claims claims = getClaims(token);
+        if (claims != null) {
+            return claims.get("email", String.class);
+        }
+        return null;
+    }
+
+    private Claims getClaims(String token) {
+        SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+
         try {
-            return Algorithm.HMAC256(secret);
-        } catch (UnsupportedEncodingException cause) {
-            throw new RuntimeException("Could not sign request", cause);
+            return Jwts
+                    .parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+
+        } catch (Exception e) {
+            return null;
         }
     }
 }

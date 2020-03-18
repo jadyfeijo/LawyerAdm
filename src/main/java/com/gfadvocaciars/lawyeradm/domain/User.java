@@ -23,7 +23,7 @@ public class User implements UserDetails {
         this.id = id;
         this.email = email;
         this.password = password;
-//        this.authorities = permissions.stream().map(x->new SimpleGrantedAuthority(x.getPermission())).collect(Collectors.toList());
+        this.authorities = permissions.stream().map(x->new SimpleGrantedAuthority(x.getPermission())).collect(Collectors.toList());
     }
 
     @Override
